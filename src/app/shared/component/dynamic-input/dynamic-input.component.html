@@ -1,0 +1,63 @@
+<div [formGroup]="formGroup" class="form-group mb-3">
+  <fieldset [disabled]="displayed">
+    <label [for]="controlName" *ngIf="label && controlType !== 'checkbox'"
+      >{{ label  }}
+      <span class="asterisk" *ngIf="required">*</span></label
+    >
+ 
+    <ng-container *ngIf="controlType === 'text'">
+      <input
+        [formControlName]="controlName"
+        [type]="controlType"
+        [id]="controlName"
+        class="form-control"
+        [required]="required"
+        [placeholder]="(placeholder ) || ''"
+      />
+    </ng-container>
+ 
+    <ng-container *ngIf="controlType === 'number'">
+      <input
+        [formControlName]="controlName"
+        [type]="controlType"
+        [id]="controlName"
+        class="form-control"
+        [required]="required"
+        [placeholder]="(placeholder ) || ''"
+      />
+    </ng-container>
+
+    <ng-container *ngIf="controlType === 'date'">
+      <input
+        [formControlName]="controlName"
+        [type]="controlType"
+        [id]="controlName"
+        class="form-control"
+        [required]="required"
+      />
+    </ng-container>
+ 
+    <ng-container *ngIf="controlType === 'select'">
+      <mat-select
+        class="preferredLanguage-edit-mode"
+        [id]="controlName"
+        [formControlName]="controlName"
+        [multiple]="isMultiple"
+        [placeholder]="(placeholder ) || ''"
+      >
+        <mat-option
+          *ngFor="let option of options"
+          [value]="option[valueProperty]"
+        >
+          {{ option[nameProperty] }}
+        </mat-option>
+      </mat-select>
+    </ng-container>
+
+
+ 
+    <app-message-validation
+      [control]="formGroup.get(controlName)"
+    ></app-message-validation>
+  </fieldset>
+</div>
